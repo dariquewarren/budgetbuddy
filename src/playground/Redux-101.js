@@ -1,50 +1,83 @@
 import { createStore } from "redux";
+// action generators - functions that return action objects
 
-const store = createStore((state = { count: 0 }, action) => {
-  switch (action.type) {
-    case "INCREMENT":
-      return {
-        count: state.count + 1
-      };
-      case 'DECREMENT':
-      return {
-          count: state.count - 1
-      }
-      case "RESET":
-          return {
-              count: 0
-          }
-       
-    default:
-      return state;
-  }
-});
 
-console.log(store.getState());
+const incrementCount =({incrementBy = 1}={})=>({
+    type: 'INCREMENT',
+    incrementBy
+}) 
 
-// Actions - an object that gets sent to the store
-// increment, decrement reset
+const decrementCount =({ decrementBy = 1}={})=>({
+    type: 'DECREMENT',
+    decrementBy
+}) 
 
-// id like to increment the count
-store.dispatch({
-  type: "INCREMENT",
-});
-store.dispatch({
-    type: "INCREMENT",
+// set count
+
+const setCount =({count }={})=>({
+type: 'SET',
+count
+})
+// reset count
+const resetCount = ()=>({
+type: 'RESET',
+})
+
+// REDUCERS
+// 1. reducers are pure functions--- output depends only on the inpout
+// 2. never change state or actions
+const countReducer =((state = { count: 0 }, action) => {
+    switch (action.type) {
+      case "INCREMENT":
+          const incrementBy = typeof action.incrementBy === 'number' ? action.incrementBy: 1 
+        return {
+          count: state.count + incrementBy 
+        };
+        case 'DECREMENT':
+            const decrementBy = typeof action.decrementBy === 'number' ? action.decrementBy: 3
+        return {
+            count: state.count - decrementBy
+        }
+        case 'SET':
+            return {
+                count: action.count
+            }
+        case "RESET":
+            return {
+                count: 0
+            }
+         
+      default:
+        return state;
+    }
   });
 
-  store.dispatch({
-  type: "DECREMENT",
-});
-store.dispatch({
-    type: "INCREMENT",
-  });
+const store = createStore(countReducer)
+
+const unsubscribe = store.subscribe(()=>{
+    console.log(store.getState());
+})
+// unsubscribe()
+store.dispatch((incrementCount()))
+store.dispatch(incrementCount({incrementBy: 5}))
+
+
+
+
+ 
+store.dispatch(decrementCount())
+store.dispatch(decrementCount({decrementBy: 10}))
+
+
 // reset set the count to 0
+// DECREMENT by value= 10
 
-store.dispatch({
-    type: "RESET",
-  });
-  
+  store.dispatch(resetCount())
+  store.dispatch(resetCount({count: 10}))
+
+
+  store.dispatch(setCount())
+  store.dispatch(setCount({count: 1050}))
+
 // id like to reset the count to zero
 
-console.log(store.getState());
