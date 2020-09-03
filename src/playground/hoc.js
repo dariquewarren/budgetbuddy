@@ -15,5 +15,38 @@ const Info = (props)=>(
     </div>
 )
 
+const withAdminWarning =(WrappedComponent)=>{
 
-ReactDOM.render(<Info info="the details"  />, document.getElementById('app'))
+    return (props)=>(
+        <div>
+        {props.isAdmin && <p>this is private info. please dont share</p>}
+        <WrappedComponent {...props}/>
+        </div>
+    )
+}
+
+const requireAuthentication = (WrappedComponent)=>{
+    return(props)=>(
+        <div>
+        {props.isAuthenticated ? <WrappedComponent {...props} /> : <p>please login</p>}
+
+        </div>
+    )
+}
+// alt way to create function
+// const requireAuthentication = (WrappedComponent)=>{
+//     return(props)=>(
+//         <div>
+       
+//         {props.isAuthenticated ?  <div>
+//             <p>Here is your info</p> <WrappedComponent {...props} />
+//             </div> : <p>please login</p>}
+        
+//         </div>
+//     )
+// }
+// requreAuthentication if true, show component if false---please login for info
+const AdminInfo = withAdminWarning(Info)
+const AuthInfo = requireAuthentication(Info)
+// ReactDOM.render(<AdminInfo isAdmin={false} info="the details"  />, document.getElementById('app'))
+ReactDOM.render(<AuthInfo isAuthenticated={true} info="the details"  />, document.getElementById('app'))
