@@ -25,7 +25,7 @@ console.log('after 2 expenses state',store.getState())
 store.dispatch(setTextFilter('water'))
 
 setTimeout(()=>{
-  store.dispatch(setTextFilter('phone'))
+  store.dispatch(setTextFilter('bill'))
 
 }, 3000)
 // getvisible expenses -> print visible ones to screen
