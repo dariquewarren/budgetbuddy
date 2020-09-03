@@ -34,15 +34,34 @@ const editExpense = (id, updates) => ({
 });
 
 // set_tect_filter
-const setTextFilter=(text='')=>({
-    type: 'SET_TEXT_FILTER',
-text
-})
-// sortby date
-// sortby amount
-// setSTART DATE
-// SETEND DATE
+const setTextFilter = (text) => ({
+  type: "SET_TEXT_FILTER",
+  text,
+});
 
+// sortby date
+
+const sortByDate = () => ({
+  type: "SORT_BY_DATE",
+  date: "date",
+});
+// sortby amount
+const sortByAmount = () => ({
+  type: "SORT_BY_AMOUNT",
+  amount: "amount",
+});
+
+// setSTART DATE
+const setStartDate = (startDate) => ({
+  type: "SET_START_DATE",
+  startDate,
+});
+// SETEND DATE
+const setEndDate = (endDate) => ({
+  type: "SET_END_DATE",
+  endDate,
+
+});
 // EXPENSES REDUCER
 const expensesReducerDefaultState = [];
 const expensesReducer = (state = expensesReducerDefaultState, action) => {
@@ -67,6 +86,8 @@ const expensesReducer = (state = expensesReducerDefaultState, action) => {
   }
 };
 
+ // filters reducer
+
 const filtersReducerDefaultState = {
   text: "",
   sortBy: "date",
@@ -76,9 +97,16 @@ const filtersReducerDefaultState = {
 
 const filtersReducer = (state = filtersReducerDefaultState, action) => {
   switch (action.type) {
-      case 'SET_TEXT_FILTER':
-          
-          return {...state, text:action.text }
+    case "SET_TEXT_FILTER":
+      return { ...state, text: action.text };
+    case "SORT_BY_AMOUNT":
+      return { ...state, sortBy: 'amount' };
+    case "SORT_BY_DATE":
+      return { ...state, sortBy: 'date' };
+    case "SET_START_DATE":
+      return { ...state, startDate: action.startDate };
+    case "SET_END_DATE":
+      return { ...state, endDate: action.endDate };
     default:
       return state;
   }
@@ -86,7 +114,26 @@ const filtersReducer = (state = filtersReducerDefaultState, action) => {
 // filters reducer
 // text=> '' ,sortby => 'date'  ,startdate =>undefined, enddate =>undefined
 // store creaton
+// get visible expenses
+const getVisibleExpenses = (expenses, {text, sortBy, startDate, endDate}) => {
+  return expenses.filter((expense)=>{
+const startDateMatch = typeof startDate !== 'number' || expense.createdAt >= startDate
+const endDateMatch = typeof endDate !== 'number' || expense.createdAt >= endDate
+const textMatch = typeof text !== 'string' || expense.description.toLowerCase().includes(text.toLowerCase()) 
+return startDateMatch&&endDateMatch&&textMatch
+  }).sort((a, b)=>{
+    if(sortBy === 'date'){
+        
+        return a.createdAt - b.createdAt ? 1 : -1
+  }else if (sortBy === 'amount'){
 
+      return b.amount - a.amount  
+  }else{
+      console.log('wrong')
+  }
+})
+};
+// sorty by creeatedAt and sortby amount
 const store = createStore(
   combineReducers({
     expenses: expensesReducer,
@@ -95,25 +142,29 @@ const store = createStore(
 );
 
 store.subscribe(() => {
-  console.log("data to filter?", store.getState());
+  const state = store.getState();
+  const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
+  console.log(visibleExpenses);
 });
 
 const expenseOne = store.dispatch(
-  addExpense({ description: "food", amount: 7000 })
+  addExpense({ description: "food", amount: 7000 , createdAt: 560})
 );
 const expenseTwo = store.dispatch(
-  addExpense({ description: "Rent", amount: 100 })
+  addExpense({ description: "Rent", amount: 100, createdAt: 1200 })
 );
+// store.dispatch(setStartDate(2000))
+// store.dispatch(removeExpense({ id: expenseOne.expense.id }));
 
+// store.dispatch(editExpense(expenseTwo.expense.id, { description:'dadsdasdasdasdasda', amount: 5000 }));
 
-// const store = createStore(expensesReducer)
+// store.dispatch(setTextFilter('rent'))
 
-store.dispatch(removeExpense({ id: expenseOne.expense.id }));
-
-store.dispatch(editExpense(expenseTwo.expense.id, { description:'dadsdasdasdasdasda', amount: 5000 }));
-
-
-store.dispatch(setTextFilter('rent'))
+store.dispatch(sortByAmount())
+//  store.dispatch(sortByDate())
+// store.dispatch(setStartDate(124));
+// store.dispatch(setStartDate()); // ybdefineed
+// store.dispatch(setEndDate(1290));
 
 const demoStats = {
   expenses: [
