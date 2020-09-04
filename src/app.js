@@ -19,7 +19,8 @@ console.log('current state',store.getState())
 // add expense water bill
 // add expense phone bill
 store.dispatch(  addExpense({ description: "water bill", amount: 7000 , createdAt: 560}))
-store.dispatch(  addExpense({ description: "phone bill", amount: 350 , createdAt: 580}))
+store.dispatch(  addExpense({ description: "rent bill", amount: 20000000 , createdAt: 981}))
+store.dispatch(  addExpense({ description: "phone bill", amount: 350 , createdAt: 765}))
 console.log('after 2 expenses state',store.getState())
 // settextfilter to bill(2items -> water )
 store.dispatch(setTextFilter('water'))
