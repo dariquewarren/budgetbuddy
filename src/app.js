@@ -4,7 +4,7 @@ import ReactDOM from 'react-dom'
 import {Provider} from 'react-redux'
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
-import {addExpense} from './actions/expenses'
+import {addExpense, editExpense} from './actions/expenses'
 import {setTextFilter} from './actions/filters'
 import getVisibleExpenses from './selectors/expenses'
 //import adexpense function
@@ -21,12 +21,14 @@ console.log('current state',store.getState())
 store.dispatch(  addExpense({ description: "water bill", amount: 7000 , createdAt: 560}))
 store.dispatch(  addExpense({ description: "rent bill", amount: 20000000 , createdAt: 981}))
 store.dispatch(  addExpense({ description: "phone bill", amount: 350 , createdAt: 765}))
+store.dispatch(  editExpense({ description: "cell bill", amount: 350 , createdAt: 765}))
+
 console.log('after 2 expenses state',store.getState())
 // settextfilter to bill(2items -> water )
 store.dispatch(setTextFilter('water'))
 
 setTimeout(()=>{
-  store.dispatch(setTextFilter('bill'))
+  store.dispatch(setTextFilter(''))
 
 }, 3000)
 // getvisible expenses -> print visible ones to screen
