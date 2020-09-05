@@ -1,6 +1,7 @@
 
 import React from 'react'
 import ReactDOM from 'react-dom'
+import {Provider} from 'react-redux'
 import AppRouter from './routers/AppRouter'
 import configureStore from './store/configureStore'
 import {addExpense} from './actions/expenses'
@@ -22,14 +23,23 @@ store.dispatch(  addExpense({ description: "phone bill", amount: 350 , createdAt
 console.log('after 2 expenses state',store.getState())
 // settextfilter to bill(2items -> water )
 store.dispatch(setTextFilter('water'))
+
+setTimeout(()=>{
+  store.dispatch(setTextFilter('phone'))
+
+}, 3000)
 // getvisible expenses -> print visible ones to screen
 const state = store.getState();
   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
 
+  
 
-
+const jsx = (
+  <Provider store={store}>
+  <AppRouter/>
+  </Provider>
+)
 
   console.log('visExpemses',visibleExpenses);
-  ReactDOM.render(
-      <AppRouter/>, document.getElementById("app"));
+  ReactDOM.render(jsx, document.getElementById("app"));
   
