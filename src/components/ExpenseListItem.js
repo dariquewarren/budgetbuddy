@@ -3,10 +3,13 @@
 import React from 'react'
 import { connect} from 'react-redux'
 import { removeExpense } from '../actions/expenses'
+import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom'
 
 const ExpenseListItem = ({id, dispatch, description, amount, createdAt})=>(
     <div>
-<h3>{description}</h3>
+<button><NavLink to={`/edit/${id}`} activeClassName="is-active">{description}</NavLink>
+</button>
+
 <p> {amount}---{createdAt} </p>
 <button
 onClick={()=>{
