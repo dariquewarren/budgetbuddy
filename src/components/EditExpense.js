@@ -1,7 +1,7 @@
 import React from 'react'
 import { connect} from 'react-redux'
 import ExpenseForm from './ExpenseForm'
-import { editExpense } from '../actions/expenses'
+import { editExpense, removeExpense } from '../actions/expenses'
 const EditExpense = (props) =>{
  return   (
         <div>
@@ -10,11 +10,15 @@ expense={props.expense}
 onSubmit={(expense)=>{
 props.dispatch(editExpense(props.match.params.id, {...expense}))
 props.history.push('/')
-    //dispatch the action to edit the expense
-    // redirect to the dashboard
-
 }}
 />
+<button
+onClick={()=>{
+    props.dispatch(removeExpense({id: props.expense.id}))
+    props.history.push('/')
+
+  
+}}>remove expense</button>
         </div>
         )
 }
