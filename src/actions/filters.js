@@ -25,7 +25,7 @@ export const setTextFilter = (text) => ({
     startDate,
   });
   // SETEND DATE
-  const setEndDate = (endDate) => ({
+ export const setEndDate = (endDate) => ({
     type: "SET_END_DATE",
     endDate,
   
