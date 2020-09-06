@@ -25,12 +25,9 @@ store.dispatch(  editExpense({ description: "cell bill", amount: 350 , createdAt
 
 console.log('after 2 expenses state',store.getState())
 // settextfilter to bill(2items -> water )
-store.dispatch(setTextFilter('water'))
+store.dispatch(setTextFilter(''))
 
-setTimeout(()=>{
-  store.dispatch(setTextFilter(''))
 
-}, 3000)
 // getvisible expenses -> print visible ones to screen
 const state = store.getState();
   const visibleExpenses = getVisibleExpenses(state.expenses, state.filters);
