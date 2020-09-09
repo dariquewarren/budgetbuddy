@@ -17,9 +17,9 @@ export default (expenses, { text, sortBy, startDate, endDate }) => {
     })
     .sort((a, b) => {
       if (sortBy === "date") {
-        return a.createdAt - b.createdAt;
+        return a.createdAt < b.createdAt;
       } else if (sortBy === "amount") {
-        return b.amount - a.amount;
+        return b.amount < a.amount;
       } else {
         console.log("wrong");
       }

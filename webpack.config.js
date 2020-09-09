@@ -11,7 +11,9 @@ mode: 'development',
     rules: [{
       loader: 'babel-loader',
       test: /\.js$/,
-      exclude: /node_modules/
+      exclude: /node_modules/,
+      presets: ["@babel/preset-react"]
+      
     }, 
   {
     test: /\.s?css$/ ,
