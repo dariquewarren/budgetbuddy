@@ -1,0 +1,24 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render first expense list item 1`] = `
+Object {
+  "children": Array [
+    <button>
+      <NavLink
+        activeClassName="is-active"
+        ariaCurrent="true"
+        to="/edit/1"
+      >
+        gum
+      </NavLink>
+    </button>,
+    <p>
+       
+      195
+      ---
+      "1970-01-01T00:00:00.000Z"
+       
+    </p>,
+  ],
+}
+`;
