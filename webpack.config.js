@@ -12,7 +12,7 @@ mode: 'development',
       loader: 'babel-loader',
       test: /\.js$/,
       exclude: /node_modules/,
-      presets: ["@babel/preset-react"]
+      presets: ["@babel/preset-env","@babel/preset-react"]
       
     }, 
   {

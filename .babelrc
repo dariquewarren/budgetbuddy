@@ -1,14 +1,17 @@
 {
        "presets":  [
-        "env",
-        "react"
+        "react",
+         "env"
+        
 ],
 "plugins": [
-      
+        "transform-react-jsx",
+        "transform-class-properties",      
         "syntax-jsx",
-        "transform-object-rest-spread",
-        "transform-class-properties",
-        "transform-react-jsx"
+        
+        "transform-object-rest-spread"
+       
+
 ],
 "test": [
         "jest"
