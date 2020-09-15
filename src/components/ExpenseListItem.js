@@ -5,7 +5,7 @@ import { connect} from 'react-redux'
 import { removeExpense } from '../actions/expenses'
 import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom'
 
-const ExpenseListItem = ({id, description, amount, createdAt})=>(
+export const ExpenseListItem = ({id, description, amount, createdAt})=>(
     <div>
 <button><NavLink to={`/edit/${id}`} activeClassName="is-active">{description}</NavLink>
 </button>

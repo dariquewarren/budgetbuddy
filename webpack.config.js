@@ -1,6 +1,10 @@
 const path = require("path");
 
-module.exports = {
+
+
+module.exports = (env)=>{
+  console.log('env', env)
+  return{
 mode: 'development',
   entry: path.join(__dirname, "/src/app.js"),
   output: {
@@ -12,7 +16,7 @@ mode: 'development',
       loader: 'babel-loader',
       test: /\.js$/,
       exclude: /node_modules/,
-      presets: ["@babel/preset-env","@babel/preset-react"]
+      
       
     }, 
   {
@@ -29,4 +33,4 @@ mode: 'development',
     contentBase: path.join(__dirname, "/public"),
     historyApiFallback: true 
   }
-};
+}};

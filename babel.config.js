@@ -1,14 +1,10 @@
 // babel.config.js
 module.exports = {
   presets: [
-    [
-      "@babel/preset-react",
-      {
-        targets: {
-          node: "current",
+    ["@babel/env", {
+        "targets": {
+            'node': 'current'
         },
-      },
-    ],
-    ["@babel/preset-env"]
-  ],
+        
+    }],"@babel/react"],
 };

@@ -1,16 +1,10 @@
-/*
-grab imports check
-render expenselistitem with  fixture data
-create snapshot
-
-*/
 import React from 'react'
 import { shallow } from "enzyme";
-import ExpenseListItem from '../../components/ExpenseListItem'
+import {ExpenseListItem} from '../../components/ExpenseListItem'
 import expenses from '../fixtures/expenses'
 
 
 test('should render first expense list item', ()=>{
     const wrapper = shallow(<ExpenseListItem {...expenses[0]} />)
-    expect(wrapper.props()).toMatchSnapshot()
+    expect(wrapper).toMatchSnapshot()
 })

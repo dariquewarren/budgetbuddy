@@ -1,9 +1,8 @@
 import React from 'react'
 import ExpenseList from './ExpenseList'
 import ExpenseListFilters from './ExpenseListFilters'
-import { connect } from "react-redux";
 
-const ExpenseDashboard = (props)=>(
+const ExpenseDashboard = ()=>(
     <div>
     this is from my dash component
     <ExpenseListFilters/>
@@ -11,9 +10,5 @@ const ExpenseDashboard = (props)=>(
 
     </div>
     )
-    const mapStateToProps = (state) => {
-        return {
-          state
-        };
-      };
-export default connect(mapStateToProps)(ExpenseDashboard)
+
+export default ExpenseDashboard
