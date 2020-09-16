@@ -2,29 +2,18 @@
 // render description, amoubt, created at
 import React from 'react'
 import { connect} from 'react-redux'
-import {removeExpense} from '../actions/expenses'
+import { removeExpense } from '../actions/expenses'
+import {BrowserRouter, Route, Switch, Link, NavLink} from 'react-router-dom'
 
-// const ExpenseListItem = (props)=>(
-//     <div>
-// {props.expenses.map((expense)=>(
-// <p><em>Description: </em>{expense.description}  <em>Amount: </em>{expense.amount}<em>Created At:</em> {expense.createdAt}  </p>
-// ))}
-//     </div>
-// )
-
-
-
-
-
-const ExpenseListItem = (  {id, dispatch, description, amount, createdAt})=>(
+export const ExpenseListItem = ({id, description, amount, createdAt})=>(
     <div>
-<h3>{description}</h3>
-<p>{amount}-{createdAt}</p>
-<button onClick={()=>{
-    dispatch(removeExpense({id:id}))
-}}>Remove Expense</button>
+<button><NavLink to={`/edit/${id}`} activeClassName="is-active">{description}</NavLink>
+</button>
+
+<p> {amount}---{createdAt} </p>
+
     </div>
 )
 
-const mapStateToProps = connect()(ExpenseListItem)
-export default mapStateToProps
+
+export default connect()(ExpenseListItem)
