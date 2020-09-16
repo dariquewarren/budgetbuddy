@@ -1,5 +1,8 @@
 const path = require("path");
+const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
+
 
 module.exports = (env)=>{
 const isProduction = env === 'production'
@@ -13,6 +16,7 @@ mode: 'development',
     path: path.join(__dirname, "/public"),
     filename: "bundle.js",
   },
+  
   plugins: [new MiniCssExtractPlugin({
     filename: 'styles.css'
   })],
@@ -25,18 +29,18 @@ mode: 'development',
       
     }, 
   {
-    test: /\.s?css$/ ,
-    use: [
-      {
-        loader: MiniCssExtractPlugin.loader,
-        options: {
-          esModule: true,
-        },
-      },
-      'css-loader',
-      'sass-loader'
-    ]
+    test: /\.s?[ac]ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ],
   }]
+  },optimization: {
+    minimize: true,
+    minimizer: [new TerserJSPlugin({
+      sourceMap: true,
+    }), new OptimizeCSSAssetsPlugin({})],
   },
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
