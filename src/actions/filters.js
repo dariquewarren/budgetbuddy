@@ -2,7 +2,7 @@
 
 
 // set_tect_filter
-export const setTextFilter = (text) => ({
+export const setTextFilter = (text = '') => ({
     type: "SET_TEXT_FILTER",
     text,
   });
@@ -25,7 +25,7 @@ export const setTextFilter = (text) => ({
     startDate,
   });
   // SETEND DATE
-  const setEndDate = (endDate) => ({
+ export const setEndDate = (endDate) => ({
     type: "SET_END_DATE",
     endDate,
   

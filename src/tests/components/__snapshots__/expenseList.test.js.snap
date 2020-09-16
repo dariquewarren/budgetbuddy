@@ -1,0 +1,47 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render ExpenseList with expenses 1`] = `
+Object {
+  "children": Array [
+    <h1>
+      Expense List
+    </h1>,
+    Array [
+      <Connect(ExpenseListItem)
+        amount={195}
+        createdAt={"1970-01-01T00:00:00.000Z"}
+        description="gum"
+        id="1"
+        note=""
+      />,
+      <Connect(ExpenseListItem)
+        amount={109500}
+        createdAt={-345600000}
+        description="fireworks"
+        id="2"
+        note=""
+      />,
+      <Connect(ExpenseListItem)
+        amount={4500}
+        createdAt={345600000}
+        description="range rover"
+        id="3"
+        note=""
+      />,
+    ],
+  ],
+}
+`;
+
+exports[`should render explist with no expenses paragraph 1`] = `
+Object {
+  "children": Array [
+    <h1>
+      Expense List
+    </h1>,
+    <p>
+      No expenses
+    </p>,
+  ],
+}
+`;

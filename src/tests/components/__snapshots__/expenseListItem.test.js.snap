@@ -1,0 +1,22 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render first expense list item 1`] = `
+<div>
+  <button>
+    <NavLink
+      activeClassName="is-active"
+      ariaCurrent="true"
+      to="/edit/1"
+    >
+      gum
+    </NavLink>
+  </button>
+  <p>
+     
+    195
+    ---
+    <Component />
+     
+  </p>
+</div>
+`;

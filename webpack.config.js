@@ -1,30 +1,50 @@
 const path = require("path");
+const TerserJSPlugin = require('terser-webpack-plugin');
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
+const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
 
-module.exports = {
+
+module.exports = (env)=>{
+const isProduction = env === 'production'
+
+
+  console.log('env', env)
+  return{
 mode: 'development',
   entry: path.join(__dirname, "/src/app.js"),
   output: {
     path: path.join(__dirname, "/public"),
     filename: "bundle.js",
   },
+  
+  plugins: [new MiniCssExtractPlugin({
+    filename: 'styles.css'
+  })],
   module: {
     rules: [{
       loader: 'babel-loader',
       test: /\.js$/,
-      exclude: /node_modules/
+      exclude: /node_modules/,
+      
+      
     }, 
   {
-    test: /\.s?css$/ ,
-    use: [
-      'style-loader',
-      'css-loader',
-      'sass-loader'
-    ]
+    test: /\.s?[ac]ss$/,
+                use: [
+                    MiniCssExtractPlugin.loader,
+                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
+                    { loader: 'sass-loader', options: { sourceMap: true } }
+                ],
   }]
+  },optimization: {
+    minimize: true,
+    minimizer: [new TerserJSPlugin({
+      sourceMap: true,
+    }), new OptimizeCSSAssetsPlugin({})],
   },
-  devtool: 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, "/public"),
     historyApiFallback: true 
   }
-};
+}};

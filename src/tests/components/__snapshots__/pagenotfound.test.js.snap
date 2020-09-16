@@ -1,0 +1,15 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`page not found component 1`] = `
+Object {
+  "children": Array [
+    "404 page not found 404 - ",
+    <Link
+      replace={false}
+      to="/"
+    >
+       go home
+    </Link>,
+  ],
+}
+`;
