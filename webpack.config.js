@@ -1,6 +1,5 @@
 const path = require("path");
-const MINIExtractTextPlugin = require('mini-css-extract-plugin')
-
+const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = (env)=>{
 const isProduction = env === 'production'
@@ -14,11 +13,9 @@ mode: 'development',
     path: path.join(__dirname, "/public"),
     filename: "bundle.js",
   },
-  plugins: [
-    new MINIExtractTextPlugin({
-      filename: 'styles.css'
-     })
-  ],
+  plugins: [new MiniCssExtractPlugin({
+    filename: 'styles.css'
+  })],
   module: {
     rules: [{
       loader: 'babel-loader',
@@ -29,10 +26,19 @@ mode: 'development',
     }, 
   {
     test: /\.s?css$/ ,
-    use: [MINIExtractTextPlugin.loader, 'css-loader', 'sass-loader']
+    use: [
+      {
+        loader: MiniCssExtractPlugin.loader,
+        options: {
+          esModule: true,
+        },
+      },
+      'css-loader',
+      'sass-loader'
+    ]
   }]
   },
-  devtool: isProduction ? 'source-map' : 'cheap-module-eval-source-map',
+  devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, "/public"),
     historyApiFallback: true 
