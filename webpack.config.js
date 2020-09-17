@@ -31,9 +31,16 @@ const isProduction = env === 'production'
     test: /\.s?[ac]ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
-                ],
+                    { loader: 'css-loader', options: { url: false, modules: true,
+                      importLoaders: 1, sourceMap: true } },
+                    { loader: 'postcss-loader', options: {
+                      sourceMap: true,
+                      postcssOptions: {
+                        plugins:['postcss-preset-env']
+                      }
+                    } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                  ],
   }]
   },optimization: {
     minimize: true,
