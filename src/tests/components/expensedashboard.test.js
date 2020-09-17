@@ -3,6 +3,6 @@ import {shallow} from 'enzyme'
 import ExpenseDashboard from '../../components/ExpenseDashboard'
 
 test('should render dashboard', ()=>{
-    wrapper = shallow(<ExpenseDashboard/>)
-    console.log(wrapper)
+  const  wrapper = shallow(<ExpenseDashboard/>)
+    expect(wrapper).toMatchSnapshot()
 })
