@@ -10,10 +10,9 @@ const isProduction = env === 'production'
 
   console.log('env', env)
   return{
-mode: 'development',
   entry: path.join(__dirname, "/src/app.js"),
   output: {
-    path: path.join(__dirname, "/public"),
+    path: path.join(__dirname, "/public", "/dist"),
     filename: "bundle.js",
   },
   
@@ -32,9 +31,16 @@ mode: 'development',
     test: /\.s?[ac]ss$/,
                 use: [
                     MiniCssExtractPlugin.loader,
-                    { loader: 'css-loader', options: { url: false, sourceMap: true } },
-                    { loader: 'sass-loader', options: { sourceMap: true } }
-                ],
+                    { loader: 'css-loader', options: { url: false, modules: true,
+                      importLoaders: 1, sourceMap: true } },
+                    { loader: 'postcss-loader', options: {
+                      sourceMap: true,
+                      postcssOptions: {
+                        plugins:['postcss-preset-env']
+                      }
+                    } },
+                    { loader: 'sass-loader', options: { sourceMap: true } },
+                  ],
   }]
   },optimization: {
     minimize: true,
@@ -45,6 +51,7 @@ mode: 'development',
   devtool: isProduction ? 'source-map' : 'inline-source-map',
   devServer: {
     contentBase: path.join(__dirname, "/public"),
-    historyApiFallback: true 
+    historyApiFallback: true,
+    publicPath: '/dist/'
   }
 }};
