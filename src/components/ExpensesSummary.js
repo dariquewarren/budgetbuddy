@@ -4,7 +4,7 @@ import expensesTotal from '../selectors/expenses-total'
 
 
 
-const ExpensesSummary = (props)=>{
+export const ExpensesSummary = (props)=>{
 console.log('props',props.expenses)
 if (props.expenses === undefined){
     return <p>no expenses</p>

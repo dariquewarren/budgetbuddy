@@ -1,0 +1,19 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`should render snapshot of component with 0 expenses added 1`] = `
+<p>
+  no expenses
+</p>
+`;
+
+exports[`should render snapshot of component with expenses added 1`] = `
+<h3>
+  <p>
+    Viewing 
+    3
+     expenses totalling $
+    114195
+     
+  </p>
+</h3>
+`;
