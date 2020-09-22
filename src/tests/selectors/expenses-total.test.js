@@ -20,21 +20,21 @@ const expenses = [{
     createdAt: moment(0).add(4, 'days').valueOf()
 }]
 
-// test('should add all expenses', ()=>{
-//     const total = selectExpensesTotal(expenses)// map and reduce
+test('should add all expenses', ()=>{
+    const total = selectExpensesTotal(expenses)// map and reduce
     
-//     expect(total).toBe(114195)
+    expect(total).toBe(114195)
     
-// })
+})
 
 test('should add one expense', ()=>{
     const total = selectExpensesTotal([expenses[0]])// map and reduce
-    console.log(total) // 109695
-    
+
+    expect(total).toBe(195)
 })
 
 test('should return 0 if no expenses', ()=>{
     const total = selectExpensesTotal()// map and reduce
-    console.log(total) // 0
-    
+
+    expect(total).toBe(0)
 })
