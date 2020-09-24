@@ -1,5 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
+import Datetime from 'react-datetime';
 
 import {
   setTextFilter,
@@ -9,25 +10,36 @@ import {
   setEndDate,
 } from "../actions/filters";
 
+
+const detailStyles = {
+  width: '18rem'
+}
+
+
 class ExpenseListFilters extends React.Component {
   
 constructor(props){
   super(props);
   this.state = {
-    value: new Date().toISOString(),
-    formattedValue: null
+    startDate: 'set start date',
+    endDate: 'set end date'
   };
 }
-  onDatesChange = (value, formattedValue) => {
-    this.setState(()=>{
-      value: value
-      formattedValue: formattedValue
-    })
+  onDatesChange = (value) => {
+    
     this.props.dispatch(setStartDate(value));
     this.props.dispatch(setEndDate(value));
   };
 
-  
+  onSetStartDate = (value)=>{
+    this.props.dispatch(setStartDate(value))
+  }
+
+  onSetEndDate = (value)=>{
+    this.props.dispatch(setEndDate(value));
+
+  }
+
   render() {
     return (
       <div>
@@ -53,15 +65,40 @@ constructor(props){
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
-        <Datetime
+      
+
+<details styles={detailStyles}>
+<summary>Filter by date range</summary>
+<details>
+<summary>set a start date </summary>
+<Datetime
         dateFormat="MM-DD-YYYY" 
         timeFormat={false}
-        value={this.createdAt}
-        initialValue={this.state.createdAt}
-        input={true}
-        onChange={this.onDateChange}
+        value={this.state.startDate}
+        initialValue={this.state.startDate}
+        input={false}
+        onChange={this.onSetStartDate}
 
-    />
+    /> 
+</details>
+
+<details>
+<summary>set an end date</summary>
+<Datetime
+dateFormat="MM-DD-YYYY" 
+timeFormat={false}
+value={this.createdAt}
+initialValue={this.state.endDate}
+input={false}
+onChange={this.onSetEndDate}
+
+/>
+</details>
+
+</details>
+
+
+   
 
        
       </div>
@@ -69,19 +106,9 @@ constructor(props){
   }
 }
 
-const startDatePicker = ()=>{
-  return(
-<div>
-</div>
-  )
-}
 
-const startDatePicker = ()=>{
-  return(
-    <div>
-    </div>
-  )
-}
+
+
 // setup value and onchane for select
 const mapStateToProps = (state) => {
   return {

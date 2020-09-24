@@ -2,6 +2,11 @@ import React from "react";
 import moment from "moment";
 import Datetime from 'react-datetime';
 
+
+var yesterday = moment().subtract( 1, 'day' );
+var valid = function( current ){
+    return current.isAfter( yesterday );
+};
 export default class ExpenseForm extends React.Component {
   constructor(props) {
     super(props);
@@ -35,7 +40,7 @@ export default class ExpenseForm extends React.Component {
     this.setState(() => ({ createdAt: date }));
   };
 
-
+  
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -79,10 +84,10 @@ export default class ExpenseForm extends React.Component {
           dateFormat="MM-DD-YYYY" 
           timeFormat={false}
           value={this.createdAt}
-          initialValue={this.state.createdAt}
+          initialValue={'created at date'}
           input={true}
           onChange={this.onDateChange}
-
+          isValidDate={valid}
       /> 
           <br></br>
           <textarea
