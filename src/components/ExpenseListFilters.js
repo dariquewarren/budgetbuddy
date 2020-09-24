@@ -11,9 +11,7 @@ import {
 } from "../actions/filters";
 
 
-const detailStyles = {
-  width: '18rem'
-}
+
 
 
 class ExpenseListFilters extends React.Component {
@@ -67,8 +65,8 @@ constructor(props){
         </select>
       
 
-<details styles={detailStyles}>
-<summary>Filter by date range</summary>
+<details >
+<summary >Filter by date range</summary>
 <details>
 <summary>set a start date </summary>
 <Datetime
