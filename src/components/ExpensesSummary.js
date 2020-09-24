@@ -10,10 +10,10 @@ if (props.expenses === undefined){
     return <p>no expenses</p>
 } else{
    return <h3>
-    {props.expenses.length !== 1 ? <p>Viewing {props.expenses.length} expenses totalling ${expensesTotal(props.expenses)} </p> : <p>Viewing {props.expenses.length} expense totalling ${expensesTotal(props.expenses)}</p> }</h3>
+    {props.expenses.length !== 1 ? <p>Viewing {props.expenses.length} expenses totalling ${expensesTotal(props.expenses) / 100} </p> : <p>Viewing {props.expenses.length} expense totalling ${expensesTotal(props.expenses) / 100}</p> }</h3>
     
 }
-    console.log(expensesTotal(props.expenses))
+
    
 } 
 const mapStateToProps = (state)=>{

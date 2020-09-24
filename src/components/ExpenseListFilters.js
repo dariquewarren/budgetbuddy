@@ -1,6 +1,7 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DateRangePicker } from "react-dates";
+import Datetime from 'react-datetime';
+
 import {
   setTextFilter,
   sortByAmount,
@@ -9,22 +10,34 @@ import {
   setEndDate,
 } from "../actions/filters";
 
+
+
+
+
 class ExpenseListFilters extends React.Component {
   
 constructor(props){
   super(props);
   this.state = {
-    calendarFocused: null
+    startDate: 'set start date',
+    endDate: 'set end date'
   };
 }
-  onDatesChange = (thing) => {
-    this.props.dispatch(setStartDate(thing.startDate));
-    this.props.dispatch(setEndDate(thing.endDate));
+  onDatesChange = (value) => {
+    
+    this.props.dispatch(setStartDate(value));
+    this.props.dispatch(setEndDate(value));
   };
 
-  onFocusChange = (calendarFocused) => {
-    this.setState(() => ({ calendarFocused }));
-  };
+  onSetStartDate = (value)=>{
+    this.props.dispatch(setStartDate(value))
+  }
+
+  onSetEndDate = (value)=>{
+    this.props.dispatch(setEndDate(value));
+
+  }
+
   render() {
     return (
       <div>
@@ -50,20 +63,49 @@ constructor(props){
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
-        <DateRangePicker
-          startDate={this.props.filters.startDate}
-          endDate={this.props.filters.endDate}
-          onDatesChange={this.onDatesChange}
-          focusedInput={this.state.calendarFocused}
-          onFocusChange={this.onFocusChange}
-          showClearDates={true}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
-        />
+      
+
+<details >
+<summary >Filter by date range</summary>
+<details>
+<summary>set a start date </summary>
+<Datetime
+        dateFormat="MM-DD-YYYY" 
+        timeFormat={false}
+        value={this.state.startDate}
+        initialValue={this.state.startDate}
+        input={false}
+        onChange={this.onSetStartDate}
+
+    /> 
+</details>
+
+<details>
+<summary>set an end date</summary>
+<Datetime
+dateFormat="MM-DD-YYYY" 
+timeFormat={false}
+value={this.createdAt}
+initialValue={this.state.endDate}
+input={false}
+onChange={this.onSetEndDate}
+
+/>
+</details>
+
+</details>
+
+
+   
+
+       
       </div>
     );
   }
 }
+
+
+
 
 // setup value and onchane for select
 const mapStateToProps = (state) => {
