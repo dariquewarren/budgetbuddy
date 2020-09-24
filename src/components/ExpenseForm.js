@@ -1,6 +1,6 @@
 import React from "react";
 import moment from "moment";
-import { SingleDatePicker } from "react-dates";
+import Datetime from 'react-datetime';
 
 export default class ExpenseForm extends React.Component {
   constructor(props) {
@@ -10,7 +10,6 @@ export default class ExpenseForm extends React.Component {
       note: props.expense ? props.expense.note : "",
       amount: props.expense ? (props.expense.amount / 100).toString(): "",
       createdAt: props.expense ? moment(props.expense.createdAt) : moment(),
-      calendarFocused: false,
       error: "",
     };
   }
@@ -32,15 +31,11 @@ export default class ExpenseForm extends React.Component {
     }
   };
 
-  onDateChange = (createdAt) => {
-    if (createdAt) {
-      this.setState(() => ({ createdAt }));
-    }
+  onDateChange = (date) => {
+    this.setState(() => ({ createdAt: date }));
   };
 
-  onFocusChange = ({ focused }) => {
-    this.setState(() => ({ calendarFocused: focused }));
-  };
+
 
   onSubmit = (e) => {
     e.preventDefault();
@@ -53,7 +48,7 @@ export default class ExpenseForm extends React.Component {
       this.props.onSubmit({
         description: this.state.description,
         amount: parseFloat(this.state.amount, 10) * 100,
-        createdAt: this.state.createdAt.valueOf(),
+        createdAt: this.state.createdAt,
         note: this.state.note,
       });
     }
@@ -79,15 +74,16 @@ export default class ExpenseForm extends React.Component {
             onChange={this.onAmountChange}
           />
 
-          <SingleDatePicker
-            date={this.state.createdAt}
-            onDateChange={this.onDateChange}
-            focused={this.state.calendarFocused}
-            onFocusChange={this.onFocusChange}
-            numberOfMonths={2}
-            isOutsideRange={() => false}
-          />
+          
+          <Datetime
+          dateFormat="MM-DD-YYYY" 
+          timeFormat={false}
+          value={this.createdAt}
+          initialValue={this.state.createdAt}
+          input={true}
+          onChange={this.onDateChange}
 
+      /> 
           <br></br>
           <textarea
             placeholder="add note for your expense (optional)"
@@ -100,3 +96,4 @@ export default class ExpenseForm extends React.Component {
     );
   }
 }
+

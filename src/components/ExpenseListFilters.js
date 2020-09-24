@@ -1,6 +1,6 @@
 import React from "react";
 import { connect } from "react-redux";
-import { DateRangePicker } from "react-dates";
+
 import {
   setTextFilter,
   sortByAmount,
@@ -14,17 +14,20 @@ class ExpenseListFilters extends React.Component {
 constructor(props){
   super(props);
   this.state = {
-    calendarFocused: null
+    value: new Date().toISOString(),
+    formattedValue: null
   };
 }
-  onDatesChange = (thing) => {
-    this.props.dispatch(setStartDate(thing.startDate));
-    this.props.dispatch(setEndDate(thing.endDate));
+  onDatesChange = (value, formattedValue) => {
+    this.setState(()=>{
+      value: value
+      formattedValue: formattedValue
+    })
+    this.props.dispatch(setStartDate(value));
+    this.props.dispatch(setEndDate(value));
   };
 
-  onFocusChange = (calendarFocused) => {
-    this.setState(() => ({ calendarFocused }));
-  };
+  
   render() {
     return (
       <div>
@@ -50,21 +53,35 @@ constructor(props){
           <option value="date">Date</option>
           <option value="amount">Amount</option>
         </select>
-        <DateRangePicker
-          startDate={this.props.filters.startDate}
-          endDate={this.props.filters.endDate}
-          onDatesChange={this.onDatesChange}
-          focusedInput={this.state.calendarFocused}
-          onFocusChange={this.onFocusChange}
-          showClearDates={true}
-          numberOfMonths={1}
-          isOutsideRange={() => false}
-        />
+        <Datetime
+        dateFormat="MM-DD-YYYY" 
+        timeFormat={false}
+        value={this.createdAt}
+        initialValue={this.state.createdAt}
+        input={true}
+        onChange={this.onDateChange}
+
+    />
+
+       
       </div>
     );
   }
 }
 
+const startDatePicker = ()=>{
+  return(
+<div>
+</div>
+  )
+}
+
+const startDatePicker = ()=>{
+  return(
+    <div>
+    </div>
+  )
+}
 // setup value and onchane for select
 const mapStateToProps = (state) => {
   return {
