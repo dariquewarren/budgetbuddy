@@ -15,9 +15,29 @@ var firebaseConfig = {
   firebase.analytics();
 
    const database = firebase.database()
-database.ref().on('value', (snapshot)=>{
-console.log('from on function',snapshot.val())
+// setup data subscription-'andrew is a software dev at amazon
+// change data and make sure it reprints 
+
+
+database.ref().on('value',(snapshot)=>{
+  const db = snapshot.val()
+  const name = snapshot.val().name
+  const job = snapshot.val().job.title
+  const company = snapshot.val().job.company
+ 
+  const sentence = `${name} is a ${job} at ${company}`
+console.log(sentence)
 })
+
+setTimeout(() => {
+  database.ref().update({
+    name : 'Darique Warren',
+    'job/title': 'Junior Developer',
+    'job/company': 'Amazon'
+  })
+  
+  
+}, 4000);
 
 // database.ref()
 // .once('value').then((snapshot)=>{
