@@ -14,7 +14,8 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-  firebase.database().ref().set({
+    const database = firebase.database()
+  database.ref().set({
       name: 'Darique ',
       age: 32,
       isSingle: true,
@@ -22,5 +23,34 @@ var firebaseConfig = {
           city: 'Harlem',
           country: 'USA'
       }
-
+  }).then(()=>{
+    console.log('data is saved')
+  }).catch((e)=>{
+    console.log('thisfailed')
   })
+
+//   database.ref().set('this is my data')
+  // database.ref('age').set({age:27})
+  // database.ref('location/city').set("nyc")
+
+  // setup then and catch
+  // make sure catch actually works
+  //switch rules to be open
+  // make sure that then runs
+  // database.ref('attributes').set({
+  //   height: 73,
+  //   weight:220
+  // }).then(()=>{
+  //   console.log('works!!')
+  // }).catch((e)=>{
+  //   console.log('failed', e)
+  // })
+
+  database.ref('isSingle').remove().then(()=>{
+    console.log('success')
+  }).catch((e)=>{
+    console.log('error')
+  })
+
+  // attributes
+  // height num &&& weight num

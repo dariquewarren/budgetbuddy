@@ -2,7 +2,7 @@ const path = require("path");
 const TerserJSPlugin = require('terser-webpack-plugin');
 const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 const OptimizeCSSAssetsPlugin = require('optimize-css-assets-webpack-plugin');
-
+const webpack = require('webpack')
 
 module.exports = (env)=>{
 const isProduction = env === 'production'
@@ -18,7 +18,10 @@ const isProduction = env === 'production'
   
   plugins: [new MiniCssExtractPlugin({
     filename: 'styles.css'
-  })],
+  }), new webpack.DefinePlugin({
+    PRODUCTION: JSON.stringify(true),
+    VERSION: JSON.stringify('5fa3b9'),
+  }) ],
   module: {
     rules: [{
       loader: 'babel-loader',
@@ -44,7 +47,7 @@ const isProduction = env === 'production'
   },
 
   {
-    test: /\.(woff(2)?|ttf|eot|svg)(\?v=\d+\.\d+\.\d+)?$/,
+    test: /\.(woff(2)?|ttf|eot|svg|png)(\?v=\d+\.\d+\.\d+)?$/,
     use: [
       {
         loader: 'file-loader',
@@ -57,7 +60,7 @@ const isProduction = env === 'production'
     ]
   }]
   },optimization: {
-    minimize: true,
+    minimize: isProduction? true : false,
     minimizer: [new TerserJSPlugin({
       sourceMap: true,
     }), new OptimizeCSSAssetsPlugin({})],
