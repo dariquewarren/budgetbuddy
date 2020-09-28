@@ -12,32 +12,38 @@ var firebaseConfig = {
   };
   // Initialize Firebase
   firebase.initializeApp(firebaseConfig);
-  firebase.analytics();
+
 
    const database = firebase.database()
-// setup data subscription-'andrew is a software dev at amazon
-// change data and make sure it reprints 
+// database.ref('notes').push({
+//   title: 'todo',
+//   body: 'grab a za from habibi ultra at the spiznizzy'
+// })
 
-
-database.ref().on('value',(snapshot)=>{
-  const db = snapshot.val()
-  const name = snapshot.val().name
-  const job = snapshot.val().job.title
-  const company = snapshot.val().job.company
- 
-  const sentence = `${name} is a ${job} at ${company}`
-console.log(sentence)
+database.ref('notes/-MIL2pd0VRn0pO34_HJm').update({
+  title: 'new ultimate title',
+  body: 'i have no ideas'
 })
 
-setTimeout(() => {
-  database.ref().update({
-    name : 'Darique Warren',
-    'job/title': 'Junior Developer',
-    'job/company': 'Amazon'
-  })
+// database.ref().on('value',(snapshot)=>{
+//   const db = snapshot.val()
+//   const name = snapshot.val().name
+//   const job = snapshot.val().job.title
+//   const company = snapshot.val().job.company
+ 
+//   const sentence = `${name} is a ${job} at ${company}`
+// console.log(sentence)
+// })
+
+// setTimeout(() => {
+//   database.ref().update({
+//     name : 'Darique Warren',
+//     'job/title': 'Junior Developer',
+//     'job/company': 'Amazon'
+//   })
   
   
-}, 4000);
+// }, 4000);
 
 // database.ref()
 // .once('value').then((snapshot)=>{
