@@ -15,15 +15,42 @@ var firebaseConfig = {
 
 
    const database = firebase.database()
+
+// setup expensed with 3 items. {descrip, note, amount, created at}
+// 3 push calls to input expenses into database
+
+database.ref('expenses').push({
+  description: 'expense 1',
+  note: 'an expense',
+  amount: 5 ,
+  createdAt: 123456789 ,
+
+})
+database.ref('expenses').push({
+  description: 'second expense',
+  note: 'an expense',
+  amount: 100 ,
+  createdAt: 426183759 ,
+
+})
+database.ref('expenses').push({
+  description: 'sir expense the third of one',
+  note: 'an expense',
+  amount: 3 ,
+  createdAt: 987654321 ,
+
+})
+
+
 // database.ref('notes').push({
 //   title: 'todo',
 //   body: 'grab a za from habibi ultra at the spiznizzy'
 // })
 
-database.ref('notes/-MIL2pd0VRn0pO34_HJm').update({
-  title: 'new ultimate title',
-  body: 'i have no ideas'
-})
+// database.ref('notes/-MIL2pd0VRn0pO34_HJm').update({
+//   title: 'new ultimate title',
+//   body: 'i have no ideas'
+// })
 
 // database.ref().on('value',(snapshot)=>{
 //   const db = snapshot.val()
