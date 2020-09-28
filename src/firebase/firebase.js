@@ -14,43 +14,61 @@ var firebaseConfig = {
   firebase.initializeApp(firebaseConfig);
   firebase.analytics();
 
-    const database = firebase.database()
-  database.ref().set({
-      name: 'Darique ',
-      age: 32,
-      isSingle: true,
-      location: {
-          city: 'Harlem',
-          country: 'USA'
-      }
-  }).then(()=>{
-    console.log('data is saved')
-  }).catch((e)=>{
-    console.log('thisfailed')
-  })
+   const database = firebase.database()
+database.ref().on('value', (snapshot)=>{
+console.log('from on function',snapshot.val())
+})
 
-//   database.ref().set('this is my data')
-  // database.ref('age').set({age:27})
-  // database.ref('location/city').set("nyc")
+// database.ref()
+// .once('value').then((snapshot)=>{
+//   const dbSnap = snapshot.val(); 
+//   console.log('success!', dbSnap)
+// }).catch((e)=>{
+// console.log('error fetching data', e)
+// })
 
-  // setup then and catch
-  // make sure catch actually works
-  //switch rules to be open
-  // make sure that then runs
-  // database.ref('attributes').set({
-  //   height: 73,
-  //   weight:220
+
+  // database.ref().set({
+  //     name: 'Darique ',
+  //     age: 32,
+  //     stressLevel: '6',
+  //     job: {
+  //       title: 'software dev',
+  //       company: 'google'
+  //     },
+  //     location: {
+  //         city: 'Harlem',
+  //         country: 'USA'
+  //     }
   // }).then(()=>{
-  //   console.log('works!!')
+  //   console.log('data is safed')
   // }).catch((e)=>{
-  //   console.log('failed', e)
+  //   console.log('thisfailed')
   // })
 
-  database.ref('isSingle').remove().then(()=>{
-    console.log('success')
-  }).catch((e)=>{
-    console.log('error')
-  })
+
+  // change the strees level to a 9
+  // change job.company value to amazon
+  // change location.city to seattle
+
+// database.ref().update({
+//   stressLevel: 9,
+//   'job/company': 'amazon',
+//   'location/city': 'seattle'
+// })
+ 
+
+// database.ref().update({
+//   job: 'software demi - god',
+//   'location/city': 'ofLights'
+// })
+
+
+  // database.ref('isSingle').remove().then(()=>{
+  //   console.log('success')
+  // }).catch((e)=>{
+  //   console.log('error')
+  // })
 
   // attributes
   // height num &&& weight num

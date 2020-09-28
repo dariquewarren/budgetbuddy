@@ -18,9 +18,6 @@ const isProduction = env === 'production'
   
   plugins: [new MiniCssExtractPlugin({
     filename: 'styles.css'
-  }), new webpack.DefinePlugin({
-    PRODUCTION: JSON.stringify(true),
-    VERSION: JSON.stringify('5fa3b9'),
   }) ],
   module: {
     rules: [{
@@ -60,7 +57,7 @@ const isProduction = env === 'production'
     ]
   }]
   },optimization: {
-    minimize: isProduction? true : false,
+    minimize: false,
     minimizer: [new TerserJSPlugin({
       sourceMap: true,
     }), new OptimizeCSSAssetsPlugin({})],
